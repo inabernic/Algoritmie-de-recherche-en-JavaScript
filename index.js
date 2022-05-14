@@ -6,7 +6,7 @@ import {
 } from "./scripts/templates/Recipe.js";
 import {
   Filter
-} from "./scripts/templates/search.js";
+} from "./scripts/search.js";
 
 class App {
   static async init() {
