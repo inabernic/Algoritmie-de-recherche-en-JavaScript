@@ -21,7 +21,7 @@ class App {
     this.setUstensiles = new Set();
     this.filteredRecipes = globalData.recipes;
     this.searchWord = "";
-    this.ingredientsSelected = new Set();
+    this.ingredientsSelected = new Array();
     this.appareilsSelected = new Set();
     this.ustensilesSelected = new Set();
     this.displayRecipes();
@@ -36,7 +36,7 @@ class App {
     // message error hidden
     const recipesSection = document.querySelector(".recipe_section");
     recipesSection.innerHTML = "";
-
+    //console.log(his.filteredRecipes);
     this.filteredRecipes.forEach((recipe) => {
       const recipeCard = new Recipe(recipe);
       recipesSection.appendChild(recipeCard.createRecipesCard());
@@ -96,7 +96,7 @@ class App {
       let itemHtml = document.createElement("li");
       itemHtml.classList.add("ingredient-tag");
       itemHtml.innerHTML = array[i];
-      if (ingredientsSelected.has(array[i])) {
+      if (ingredientsSelected.includes(array[i])) {
         itemHtml.classList.add("disabled");
       }
       items.appendChild(itemHtml);
@@ -242,7 +242,7 @@ class App {
         <img src="./images/remove-icon.png" alt=""/></span>`;
         items.appendChild(itemHtml);
         self.setIngredients.delete(ing.innerText);
-        self.ingredientsSelected.add(ing.innerText);
+        self.ingredientsSelected.push(ing.innerText);
         self.filterRecipes();
 
         //listener to remove
@@ -250,7 +250,11 @@ class App {
           items.removeChild(itemHtml);
           ingredientsParrentNode.appendChild(ing);
           self.setIngredients.add(ing.innerText);
-          self.ingredientsSelected.delete(ing.innerText);
+          //The splice() method changes the contents of an array by removing existing elements and/or adding new elements.
+          const index = self.ingredientsSelected.indexOf(ing);
+          if (index > -1) {
+            self.ingredientsSelected.splice(index, 1);
+          }
           self.filterRecipes();
         });
       });
