@@ -22,8 +22,8 @@ class App {
     this.filteredRecipes = globalData.recipes;
     this.searchWord = "";
     this.ingredientsSelected = new Array();
-    this.appareilsSelected = new Set();
-    this.ustensilesSelected = new Set();
+    this.appareilsSelected = new Array();
+    this.ustensilesSelected = new Array();
     this.displayRecipes();
     this.attachListnerGlobalSearch();
     this.attachListnerSearchIngDropdown();
@@ -65,11 +65,7 @@ class App {
     this.attachListenerTagsUstensils();
   }
 
-  static createListIngredients(
-    dataToDisplay,
-    setIngredients,
-    ingredientsSelected
-  ) {
+  static createListIngredients(dataToDisplay, setIngredients, ingredientsSelected) {
     ////Set n'autorise pas les doublons.
     setIngredients.clear();
     dataToDisplay.forEach((recipe) => {
@@ -123,18 +119,14 @@ class App {
       let itemHtml = document.createElement("li");
       itemHtml.classList.add("appareil-tag");
       itemHtml.innerHTML = array[i];
-      if (appareilsSelected.has(array[i])) {
+      if (appareilsSelected.includes(array[i])) {
         itemHtml.classList.add("disabled");
       }
       items.appendChild(itemHtml);
     }
   }
 
-  static createListUstensiles(
-    dataToDisplay,
-    setUstensiles,
-    ustensilesSelected
-  ) {
+  static createListUstensiles(dataToDisplay, setUstensiles, ustensilesSelected) {
     //setUstensiles.clear();
     dataToDisplay.forEach((recipe) => {
       recipe.ustensils.forEach((ustensil) => {
@@ -156,7 +148,7 @@ class App {
       let itemHtml = document.createElement("li");
       itemHtml.classList.add("ustensile-tag");
       itemHtml.innerHTML = array[i];
-      if (ustensilesSelected.has(array[i])) {
+      if (ustensilesSelected.includes(array[i])) {
         itemHtml.classList.add("disabled");
       }
       items.appendChild(itemHtml);
@@ -180,8 +172,7 @@ class App {
       let searchText = this.value;
       let filteredSetOfIngr = Filter.searchText(
         searchText,
-        self.setIngredients
-      );
+        self.setIngredients);
       App.createItemsIngredient(filteredSetOfIngr, self.ingredientsSelected);
       self.attachListenerTagsIngredients();
     });
@@ -251,7 +242,8 @@ class App {
           ingredientsParrentNode.appendChild(ing);
           self.setIngredients.add(ing.innerText);
           //The splice() method changes the contents of an array by removing existing elements and/or adding new elements.
-          const index = self.ingredientsSelected.indexOf(ing);
+          const index = self.ingredientsSelected.indexOf(ing.innerText);
+
           if (index > -1) {
             self.ingredientsSelected.splice(index, 1);
           }
@@ -278,18 +270,22 @@ class App {
           app.innerText +
           `<span class="tags__close">
         <img src="./images/remove-icon.png" alt=""/></span>`;
+        items.appendChild(itemHtml);
+        //self.setAppareils.delete(app.innerText);
+        self.appareilsSelected.push(app.innerText);
+        self.filterRecipes();
 
+        //listener to remove
         itemHtml.addEventListener("click", function () {
           items.removeChild(itemHtml);
           appareilsParrentNode.appendChild(app);
           self.setAppareils.add(app.innerText);
-          self.appareilsSelected.delete(app.innerText);
+          const index = self.appareilsSelected.indexOf(app.innerText);
+          if (index > -1) {
+            self.appareilsSelected.splice(index, 1);
+          }
           self.filterRecipes();
         });
-        items.appendChild(itemHtml);
-        self.setAppareils.delete(app.innerText);
-        self.appareilsSelected.add(app.innerText);
-        self.filterRecipes();
       });
     }
   }
@@ -313,18 +309,23 @@ class App {
           ust.innerText +
           `<span class="tags__close">
         <img src="./images/remove-icon.png" alt=""/></span>`;
+        items.appendChild(itemHtml);
+        self.setUstensiles.delete(ust.innerText);
+        self.ustensilesSelected.push(ust.innerText);
+        self.filterRecipes();
 
+        //listener to remove
         itemHtml.addEventListener("click", function () {
           items.removeChild(itemHtml);
           ustensilsParrentNode.appendChild(ust);
           self.setUstensiles.add(ust.innerText);
-          self.ustensilesSelected.delete(ust.innerText);
+          const index = self.ustensilesSelected.indexOf(ust.innerText);
+          if (index > -1) {
+            self.ustensilesSelected.splice(index, 1);
+          }
           self.filterRecipes();
         });
-        items.appendChild(itemHtml);
-        self.setUstensiles.delete(ust.innerText);
-        self.ustensilesSelected.add(ust.innerText);
-        self.filterRecipes();
+
       });
     }
   }

@@ -35,43 +35,30 @@ export class Filter {
     }
 
     let recipesMatchedTags = [];
-    if (igredientsSelected.size > 0 || appareilsSelected.size > 0 || ustensilesSelected.size > 0) {
+    if (igredientsSelected.length > 0 || appareilsSelected.length > 0 || ustensilesSelected.length > 0) {
       for (let recipe of recipesMatched) {
-        let ingContained = false;
-        let ingredientsAsString = recipe.ingredients.map((el) => el.ingredient);
+        //ingredientsAsString- un array of the strings
+        let ingredientsAsString = recipe.ingredients.map((el) => el.ingredient.toLowerCase());
         //console.log(igredientsSelected);
-        ingContained = igredientsSelected.every((el) =>
+        let ingContained = igredientsSelected.every((el) =>
           ingredientsAsString.includes(el)
         );
-      }
 
-      let ustContained = false;
-      for (let ustensilSel of ustensilesSelected) {
-        for (let ust of recipe.ustensils) {
-          if (ust === ustensilSel) {
-            ustContained = true;
-            break;
-          } else {
-            ustContained = false;
-          }
-        }
-        if (!ustContained) {
-          break;
-        }
-      }
+        let appContained = appareilsSelected.every((el) =>
+          recipe.appliance.toLowerCase() === el
+        );
 
-      let applContained = false;
-      for (let apareillSel of appareilsSelected) {
-        if (recipe.appliance === apareillSel) {
-          applContained = true;
-        } else {
-          applContained = false;
-          break;
-        }
-      }
+        //ingredientsAsString- un array of the strings
+        let ustensileAsString = recipe.ustensils.map((el) => el.toLowerCase());
+        //console.log(igredientsSelected);
+        let ustContained = ustensilesSelected.every((el) =>
+          ustensileAsString.includes(el)
+        );
 
-      if (ingContained && ustContained && applContained) {
-        recipesMatchedTags.push(recipe);
+
+        if (ingContained && ustContained && appContained) {
+          recipesMatchedTags.push(recipe);
+        }
       }
     } else {
       recipesMatchedTags = recipesMatched;
