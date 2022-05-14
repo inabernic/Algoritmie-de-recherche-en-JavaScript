@@ -32,8 +32,10 @@ export class Filter {
           }
         }
       }
+    }
 
-      let recipesMatchedIngredients = [];
+    let recipesMatchedTags = [];
+    if (igredientsSelected.size > 0 || appareilsSelected.size > 0 || ustensilesSelected.size > 0) {
       for (let recipe of recipesMatched) {
         let ingContained = false;
         let ingredientsAsString = recipe.ingredients.map((el) => el.ingredient);
@@ -41,38 +43,51 @@ export class Filter {
         ingContained = igredientsSelected.every((el) =>
           ingredientsAsString.includes(el)
         );
+      }
 
-        let ustContained = false;
-        for (let ustensilSel of ustensilesSelected) {
-          for (let ust of recipe.ustensils) {
-            if (ust === ustensilSel) {
-              ustContained = true;
-              break;
-            } else {
-              ustContained = false;
-            }
-          }
-          if (!ustContained) {
+      let ustContained = false;
+      for (let ustensilSel of ustensilesSelected) {
+        for (let ust of recipe.ustensils) {
+          if (ust === ustensilSel) {
+            ustContained = true;
             break;
-          }
-        }
-
-        let applContained = false;
-        for (let apareillSel of appareilsSelected) {
-          if (recipe.appliance === apareillSel) {
-            applContained = true;
           } else {
-            applContained = false;
-            break;
+            ustContained = false;
           }
         }
-
-        if (ingContained && ustContained && applContained) {
-          recipesMatchedIngredients.push(recipe);
+        if (!ustContained) {
+          break;
         }
       }
 
-      return recipesMatchedIngredients;
+      let applContained = false;
+      for (let apareillSel of appareilsSelected) {
+        if (recipe.appliance === apareillSel) {
+          applContained = true;
+        } else {
+          applContained = false;
+          break;
+        }
+      }
+
+      if (ingContained && ustContained && applContained) {
+        recipesMatchedTags.push(recipe);
+      }
+    } else {
+      recipesMatchedTags = recipesMatched;
     }
+    return recipesMatchedTags;
+  }
+
+
+  //function for serach in the Dropdowns( serach in the list of Ingr, in the list of App, in the list of Ust)
+  static searchText(word, setOfItems) {
+    let setFoundItems = new Set();
+    for (let item of setOfItems) {
+      if (item.includes(word)) {
+        setFoundItems.add(item);
+      }
+    }
+    return setFoundItems;
   }
 }
