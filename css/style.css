@@ -1,0 +1,513 @@
+:root {
+    --light-grey: #e7e7e7;
+    --grey: #585252;
+    --dark-grey: #c7bebe;
+    --primary: #3282f7;
+    --success: #68d9a4;
+    --danger: #ed6454;
+    --border-radius: 5px;
+    --fs-18: 18px;
+    --fs-12: 12px;
+    --br-5: 5px;
+}
+
+.container {
+    max-width: 1440px;
+    margin: auto;
+}
+
+.search ::-webkit-scrollbar {
+    display: none;
+}
+
+#logoCenter {
+    display: block;
+    margin: auto;
+    text-align: center;
+    margin-top: 2rem;
+    width: 200px;
+}
+
+/* First filter */
+.search {
+    width: 100%;
+}
+
+#search-all {
+    width: 94%;
+    height: 65px;
+    font-size: 18px;
+    font-family: "lato", sans-serif;
+    text-align: left;
+    background-color: #e7e7e7;
+    border: none;
+    border-radius: 5px;
+    padding-left: 2rem;
+    padding-right: 4rem;
+    margin: 0 0 0 7%;
+}
+
+.search-every {
+    position: relative;
+    width: 99%;
+}
+
+.search-every input:focus {
+    opacity: 100%;
+    outline: none;
+}
+
+.search-every input::placeholder {
+    opacity: 25%;
+}
+
+.fa-search {
+    position: absolute;
+    right: 0rem;
+    top: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#search-all-list,
+#search-all-selected {
+    margin-left: 7%;
+}
+
+/*drop down */
+/* Filters section */
+.filter {
+    margin-bottom: 2em;
+    text-align: -webkit-center;
+}
+
+.ingredient-tag::after {
+    content: "";
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: #fff;
+    transition: 300ms;
+}
+
+.ingredient-tag:hover::after {
+    width: 15%;
+}
+
+@media only screen and (min-width: 992px) {
+    .filter {
+        margin-left: 7%;
+        display: flex;
+        gap: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+.filter__custom-select {
+    position: relative;
+    cursor: pointer;
+    width: 170px;
+    margin-bottom: 1em;
+}
+
+.filter__custom-select input[type="text"]::placeholder {
+    color: #fff;
+    opacity: 0.5;
+}
+
+.filter__select {
+    border: none;
+    color: #fff;
+    width: 100%;
+    height: 69px;
+    text-align: start;
+    padding-left: 20px;
+    border-radius: var(--br-5);
+    font-size: var(--fs-18);
+    cursor: pointer;
+}
+
+.filter__select:focus {
+    outline: none;
+    border: none;
+}
+
+.filter__select--primary {
+    background: var(--primary);
+}
+
+.filter__select--success {
+    background: var(--success);
+}
+
+.filter__select--danger {
+    background: var(--danger);
+}
+
+.filter__custom-arrow {
+    position: absolute;
+    right: 18px;
+    top: 0;
+    bottom: 4rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    pointer-events: none;
+}
+
+.filter__custom-arrow--rotate {
+    transform: rotate(180deg);
+}
+
+.filter__custom-menu {
+    display: none;
+}
+
+.fa-chevron-up {
+    display: none;
+}
+
+#drop-ing_open,
+#drop-app_open,
+#drop-ust_open {
+    display: none;
+}
+
+#drop-ing_open,
+#drop-app_open,
+#drop-ust_open {
+    flex-direction: column;
+    border: none;
+    color: #fff;
+    padding: 1em;
+    text-align: start;
+    border-radius: var(--br-5);
+    font-size: var(--fs-18);
+    cursor: pointer;
+    justify-content: space-between;
+    max-height: 23em;
+}
+
+#drop-ingr_close,
+#drop-ing_open {
+    background: var(--primary);
+}
+
+#drop-app_close,
+#drop-app_open {
+    background: var(--success);
+}
+
+#drop-ust_close,
+#drop-ust_open {
+    background: var(--danger);
+}
+
+#search-drop_ing::placeholder,
+#search-drop_app::placeholder,
+#search-drop_ust::placeholder {
+    font-style: italic;
+    color: var(--grey);
+    font-size: medium;
+}
+
+.search-drop_ing,
+.search-drop_app,
+.search-drop_ust {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    padding-top: 0.1em;
+}
+
+.search-drop_ing input,
+.search-drop_app input,
+.search-drop_ust input {
+    border: none;
+    color: #e7e7e7;
+}
+
+.search-drop_ing input {
+    background-color: var(--primary);
+}
+
+.search-drop_app input {
+    background-color: var(--success);
+}
+
+.search-drop_ust input {
+    background-color: var(--danger);
+}
+
+#drop-ingredients_open,
+#drop-appareils_open,
+#drop-ustensiles_open {
+    column-count: 3 !important;
+    overflow: hidden;
+}
+
+#drop-ingredients_open li,
+#drop-appareils_open li,
+#drop-ustensiles_open li {
+    width: 169px;
+    list-style-type: none;
+    list-style-position: inside;
+}
+
+
+/*tags sélectionés */
+.tags {
+    margin: 1rem 1rem 1rem 7%;
+    display: flex;
+}
+
+ .tags i {
+    font-weight: 400;
+    font-style: normal;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-right: 1em;
+}
+
+#tagIngr,
+#tagAppl,
+#tagUst {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color: white;
+    font-family: "lato", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    height: 37px;
+    vertical-align: middle;
+    line-height: 37px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+#tagIngr i{
+    background-color: var(--primary);
+}
+
+#tagAppl i{
+    background-color: var(--success);
+}
+
+#tagUst i{
+    background-color: var(--danger);
+}
+
+.tags__close img{
+    width: 15px;
+    height: 15px;
+}
+
+.disabled{
+    color: var(--grey);;
+    pointer-events: none;
+}
+
+/*message recherche vide*/
+#filtered-empty {
+    display: none;
+    color: var(--light-grey);
+    font-size: 1.2em;
+    text-align: center;
+    width: 83%;
+    margin: auto;
+    margin-bottom: 1em;
+    padding: 1rem;
+    background-color: #ed6454;
+    border-radius: var(--border-radius);
+}
+
+#filtered-empty img {
+    width: 150px;
+}
+
+/*fiches recettes*/
+.recipe_section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main {
+    max-width: 1440px;
+    margin-left: 7%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    z-index: 2;
+    top: 0;
+}
+
+/* article recipes */
+article {
+    max-width: 25rem;
+    margin: 2rem 1rem 0rem 0;
+}
+
+.article_img {
+    height: 178px;
+    background-color: #c7bebe;
+    border-radius: 5px 5px 0 0;
+}
+
+main img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px 5px 0 0;
+    object-fit: cover;
+}
+
+.article-all {
+    display: flex;
+    flex-direction: column;
+    height: 186px;
+    background-color: #e7e7e7;
+    border-radius: 0 0 5px 5px;
+}
+
+.article:hover,
+.article:focus {
+    transform: scale(1.00);
+    transition: 200ms;
+    border: solid 2.5px rgba(136, 133, 133, 0.8);
+    border-radius: 10px;
+}
+
+.title,
+.details {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+
+.details-ing {
+    margin-right: 1em;
+    display: flex;
+    flex-direction: column;
+    font-family: "lato", sans-serif;
+    font-size: 12px;
+    width: 188px;
+    height: 108px;
+}
+
+.ingr_bold {
+    font-weight: bold;
+}
+
+.quantite {
+    font-weight: normal;
+}
+
+.details-txt {
+    width: 171px;
+    height: 107px;
+    font-family: "roboto", sans-serif;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title {
+    font-family: "lato", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.title-txt {
+    font-family: "lato", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    width: 16rem;
+}
+
+.title-time {
+    width: 103px;
+    text-align: right;
+}
+
+/*RESPONSIVE*/
+@media screen and (max-width: 892px) {
+    .fa-search {
+        right: 2rem;
+    }
+
+    .tags,
+    .tagsIngr,
+    .tagsAppl,
+    .tagsUst {
+        flex-wrap: wrap;
+    }
+
+    .search-every {
+        width: 94%;
+        margin: 0;
+    }
+
+    .drop {
+        margin-bottom: 2%;
+    }
+
+    .drop-menu_open {
+        column-count: 3 !important;
+    }
+
+    article {
+        margin: auto;
+        margin-bottom: 2%;
+    }
+
+    .fa-chevron-up {
+        font-size: 1rem;
+        color: white;
+        top: 2%;
+        right: 2%;
+    }
+
+    .drop-ingredients {
+        margin-right: 0rem;
+    }
+
+    #drop-ing_open,
+    #drop-app_open,
+    #drop-ust_open {
+        max-width: 50%;
+    }
+
+    #drop-ingredients_open,
+    #drop-appareils_open,
+    #drop-ustensiles_open {
+        display: flex;
+        flex-wrap: wrap;
+        column-count: 2 !important;
+    }
+
+    .drop-appareil {
+        margin-right: 0rem;
+        margin-left: 0rem;
+    }
+
+    .drop-ustensiles {
+        margin-left: 0rem;
+    }
+
+    .search-every input::placeholder {
+        font-size: 0.5rem;
+    }
+
+    #search-all::placeholder {
+        font-size: 0.7rem;
+        opacity: 0.4;
+    }
+}
+
+.fa-chevron-down {
+    position: absolute;
+    right: 18px;
+    top: 25px;
+    color: var(--light-grey);
+}
