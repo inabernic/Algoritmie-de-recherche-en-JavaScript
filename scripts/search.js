@@ -36,7 +36,8 @@ export class Filter {
 
     let recipesMatchedTags = [];
     if (igredientsSelected.length > 0 || appareilsSelected.length > 0 || ustensilesSelected.length > 0) {
-      for (let recipe of recipesMatched) {
+
+      recipesMatched.forEach(recipe => {
         //ingredientsAsString- un array of the strings
         let ingredientsAsString = recipe.ingredients.map((el) => el.ingredient.toLowerCase());
         //console.log(igredientsSelected);
@@ -59,7 +60,7 @@ export class Filter {
         if (ingContained && ustContained && appContained) {
           recipesMatchedTags.push(recipe);
         }
-      }
+      })
     } else {
       recipesMatchedTags = recipesMatched;
     }
