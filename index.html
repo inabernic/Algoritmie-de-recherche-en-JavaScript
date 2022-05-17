@@ -26,8 +26,7 @@
     <!--The first zone search-->
     <div class="search">
       <div class="search-every">
-        <input id="search-all" type="search" placeholder="Rechercher une recette (titre, ingredient, description...)"
-          autocomplete="off" />
+        <input id="search-all" type="search" placeholder="Rechercher une recette (titre, ingredient, description...)"/>
         <i class="fas fa-search"></i>
       </div>
 
@@ -40,7 +39,7 @@
       </div>
     </div>
     <!--drop down-->
-    <section class="filter">
+    <div class="filter">
       <div class="drop drop-ingredients">
         <div id="drop-ing_close" class="drop-menu_closed filter__custom-select">
           <span class="filter__custom-arrow"></span>
@@ -49,7 +48,7 @@
         </div>
         <div id="drop-ing_open" class="drop-all_open">
           <div class="search-drop_ing">
-            <input class="search-drop" id="search-drop_ing" type="" placeholder="Rechercher un ingrédient"
+            <input class="search-drop" id="search-drop_ing" type="text" placeholder="Rechercher un ingrédient"
               autocomplete="off" />
             <i class="fas fa-chevron-up" id="ingredients-up"></i>
           </div>
@@ -68,8 +67,7 @@
         </div>
         <div id="drop-app_open" class="drop-all_open">
           <div class="search-drop_app">
-            <input class="search-drop" id="search-drop_app" type="" placeholder="Rechercher un appareil"
-              autocomplete="off" />
+            <input class="search-drop" id="search-drop_app" type="text" placeholder="Rechercher un appareil" />
             <i class="fas fa-chevron-up" id="appareils-up"></i>
           </div>
 
@@ -87,8 +85,7 @@
         </div>
         <div id="drop-ust_open" class="drop-all_open">
           <div class="search-drop_ust">
-            <input class="search-drop" id="search-drop_ust" type="" placeholder="Rechercher un ustensile"
-              autocomplete="off" />
+            <input class="search-drop" id="search-drop_ust" type="text" placeholder="Rechercher un ustensile" />
             <i class="fas fa-chevron-up" id="ustensiles-up"></i>
           </div>
 
@@ -97,7 +94,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
     <!--message recherche vide-->
     <div id="filtered-empty">
       <img id="error-img" src="/images/logo.png" alt=" Les Petits Plats, logo" />
@@ -112,9 +109,8 @@
 
 
   <!-- Page -->
-  <script defer type="module" src="./index.js"></script>
-  <script defer src="/scripts/templates/dropdowns.js"></script>
-
+  <script type="module" src="./index.js"></script>
+  <script src="/scripts/templates/dropdowns.js"></script>
 </body>
 
 </html>
