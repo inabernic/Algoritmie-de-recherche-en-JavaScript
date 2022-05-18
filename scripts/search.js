@@ -13,11 +13,13 @@ export class Filter {
     if (request.length < 3) {
       recipesMatched = data;
     } else {
-      //recipesMatched = va avoir la liste des recetettes filtré, qui von inclure ou un nom, ou une descript, ou un ingredient
-      recipesMatched = data.filter(recipe => recipe.name.toLowerCase().includes(request) ||
+
+      const matchSearcWord = recipe => recipe.name.toLowerCase().includes(request) ||
         recipe.description.toLowerCase().includes(request) ||
-        recipe.ingredients.some(ingr => ingr.ingredient.toLowerCase().includes(request))
-      );
+        recipe.ingredients.some(ingr => ingr.ingredient.toLowerCase().includes(request));
+
+      //recipesMatched = va avoir la liste des recetettes filtré, qui von inclure ou un nom, ou une descript, ou un ingredient
+      recipesMatched = data.filter(matchSearcWord);
     }
 
     // verification par tag
