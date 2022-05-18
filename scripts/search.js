@@ -13,27 +13,14 @@ export class Filter {
     if (request.length < 3) {
       recipesMatched = data;
     } else {
-      for (let recipe of data) {
-        if (recipe.name.toLowerCase().includes(request)) {
-          recipesMatched.push(recipe);
-          continue;
-          // Check if a recipe match with the requested description
-        } else if (recipe.description.toLowerCase().includes(request)) {
-          recipesMatched.push(recipe);
-          continue;
-        }
-
-        for (let ingr of recipe.ingredients) {
-          //console.log(ingr);
-          if (ingr.ingredient.toLowerCase().includes(request)) {
-            recipesMatched.push(recipe);
-            //console.log(recipesMatched);
-            break;
-          }
-        }
-      }
+      //recipesMatched = va avoir la liste des recetettes filtré, qui von inclure ou un nom, ou une descript, ou un ingredient
+      recipesMatched = data.filter(recipe => recipe.name.toLowerCase().includes(request) ||
+        recipe.description.toLowerCase().includes(request) ||
+        recipe.ingredients.some(ingr => ingr.ingredient.toLowerCase().includes(request))
+      );
     }
 
+    // verification par tag
     let recipesMatchedTags = [];
     if (igredientsSelected.length > 0 || appareilsSelected.length > 0 || ustensilesSelected.length > 0) {
 
@@ -56,26 +43,24 @@ export class Filter {
           ustensileAsString.includes(el)
         );
 
-
         if (ingContained && ustContained && appContained) {
           recipesMatchedTags.push(recipe);
         }
-      })
+      });
     } else {
       recipesMatchedTags = recipesMatched;
     }
     return recipesMatchedTags;
   }
 
-
-  //function for serach in the Dropdowns( serach in the list of Ingr, in the list of App, in the list of Ust)
+  //function for serach in the Dropdowns( search in the list of Ingr, in the list of App, in the list of Ust)
   static searchText(word, setOfItems) {
     let setFoundItems = new Set();
-    for (let item of setOfItems) {
+    setOfItems.forEach(item => {
       if (item.includes(word)) {
         setFoundItems.add(item);
       }
-    }
+    });
     return setFoundItems;
   }
 }
