@@ -172,6 +172,7 @@
 #drop-app_open,
 #drop-ust_open {
     display: none;
+    margin-bottom: 1rem;
 }
 
 #drop-ing_open,
@@ -226,6 +227,8 @@
 .search-drop_ust input {
     border: none;
     color: #e7e7e7;
+    width: -webkit-fill-available;
+
 }
 
 .search-drop_ing input {
